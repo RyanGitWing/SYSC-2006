@@ -1,0 +1,65 @@
+package main
+
+import "fmt"
+
+func main() {
+	testIsPrime()
+}
+
+func testIsPrime() {
+	var tests = []struct {
+		num      int
+		expected bool
+	}{
+		{1, false}, // 1 is not prime
+		{2, true},  //2 is prime
+		{3, true},
+		{4, false},
+		{5, true},
+		{6, false},
+		{7, true},
+		{8, false},
+		{9, false},
+		{10, false},
+		{11, true},
+		{12, false},
+		{13, true},
+		{14, false},
+		{15, false},
+		{16, false},
+		{17, true},
+		{18, false},
+		{19, true},
+		{20, false},
+	}
+
+	fmt.Println("Testing isPrime")
+	passed := 0
+	failed := 0
+	for _, test := range tests {
+		if result := isPrime(test.num); result != test.expected {
+			fmt.Printf("isPrime(%v) returns %v, not %v\n", test.num, result, test.expected)
+			failed += 1
+		} else {
+			passed += 1
+		}
+	}
+	fmt.Printf("%d tests passed, %d tests failed\n", passed, failed)
+}
+
+/* Return true if n is prime; otherwise return false. Parameter n >= 1. */
+func isPrime(n int) bool {
+	switch {
+	case n == 1:
+		return false
+	case n == 2:
+		return true
+	default:
+		for i := 2; i < n; i++ {
+			if n%i == 0 {
+				return false
+			}
+		}
+	}
+	return true
+}
